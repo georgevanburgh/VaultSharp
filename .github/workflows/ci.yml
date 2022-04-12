@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: start vault
+        run: |
+          docker run -d --rm --name vault -p 8200:8200 -e VAULT_LOCAL_CONFIG='{"backend": {"file": {"path": "/tmp/vault"}}, "disable_mlock": "true", "raw_storage_endpoint": "true", "listener": {"tcp": {"address": "0.0.0.0:8200", "tls_disable": "1"}}}' vault:latest server
+      - name: run tests
+        run: |
+          dotnet run --project test/VaultSharp.Samples
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ProgramOutput.txt
+          path: ProgramOutput.txt

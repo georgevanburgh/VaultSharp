@@ -358,7 +358,7 @@ namespace VaultSharp.Samples
             Assert.True(kv1Secret.Data.Count == 2);
 
             _authenticatedVaultClient.V1.Secrets.KeyValue.V1.DeleteSecretAsync(path).Wait();
-            
+
         }
 
         public class FooData
@@ -516,7 +516,7 @@ namespace VaultSharp.Samples
                 Description = "store logs in a file - test cases",
                 Options = new FileAuditBackendOptions
                 {
-                    FilePath = "/var/log/file",
+                    FilePath = "/vault/logs/file",
                     LogSensitiveDataInRawFormat = true.ToString().ToLowerInvariant(),
                     HmacAccessor = false.ToString().ToLowerInvariant(),
                     Format = "jsonx"
@@ -531,7 +531,7 @@ namespace VaultSharp.Samples
                 Description = "2 store logs in a file - test cases",
                 Options = new FileAuditBackendOptions
                 {
-                    FilePath = "/var/log/file2",
+                    FilePath = "/vault/logs/file2",
                     LogSensitiveDataInRawFormat = true.ToString().ToLowerInvariant(),
                     HmacAccessor = false.ToString().ToLowerInvariant(),
                     Format = "jsonx"
@@ -790,7 +790,7 @@ namespace VaultSharp.Samples
 
             // gives path not supported errors?. raja todo
             /*
-            var duoAuthBackend = authBackends.Data.Values.First(); 
+            var duoAuthBackend = authBackends.Data.Values.First();
 
             var duoConfig = new DuoConfig
             {
@@ -854,10 +854,10 @@ namespace VaultSharp.Samples
             // remount - raja todo
 
             /*
-             
+
             // mount a new secret backend
             _authenticatedVaultClient.V1.System.MountSecretBackendAsync(newSecretBackend).Wait();
-             
+
             // var newPath = "aws2";
             // _authenticatedVaultClient.V1.System.RemountSecretBackendAsync(newSecretBackend.Path, new Path);
 
