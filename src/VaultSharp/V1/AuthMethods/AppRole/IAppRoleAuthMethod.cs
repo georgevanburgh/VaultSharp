@@ -16,5 +16,7 @@ namespace VaultSharp.V1.AuthMethods.AppRole
         /// <param name="mountPoint">Mount point of the AppRole Auth method</param>
         /// <returns></returns>
         Task<Secret<AppRoleInfo>> ReadRoleAsync(string roleName, string mountPoint = "approle");
+
+        Task<Secret<AppRoleSecretId>> CreateSecretIdAsync(string roleName, AppRoleSecretConfig request, string mountPoint = "approle");
     }
 }
